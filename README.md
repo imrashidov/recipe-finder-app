@@ -3,7 +3,9 @@
 This is a web application for browsing and viewing recipes. Users can see a list of recipes and view detailed information about each recipe.
 
 ## Screenshots
+
 ![Home Page](screenshots/home.png)
+![Recipes](screenshots/recipes.png)
 ![Recipe Details](screenshots/recipe-details.png)
 
 ## Technologies Used
@@ -24,12 +26,14 @@ This is a web application for browsing and viewing recipes. Users can see a list
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/imrashidov/recipe-finder-app.git
    cd recipe-finder-app
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -47,7 +51,6 @@ This is a web application for browsing and viewing recipes. Users can see a list
 
 Start the development server:
 
-
 The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ### Building for Production
@@ -56,16 +59,15 @@ To build the application for production:
 
 ```bash
 npm run build
-# or 
+# or
 yarn build
 ```
 
 ```bash
 npm start
-# or 
+# or
 yarn start
 ```
-
 
 ## Features
 
@@ -83,5 +85,3 @@ yarn start
   - `Loading.js`: Loading indicator component
   - `RecipesList.js`: Component for displaying the list of recipes
   - `RecipeDetails.js`: Component for displaying recipe details
-
-
