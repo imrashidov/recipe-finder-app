@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe App
+
+This is a web application for browsing and viewing recipes. Users can see a list of recipes and view detailed information about each recipe.
+
+## Screenshots
+![Home Page](screenshots/home.png)
+![Recipe Details](screenshots/recipe-details.png)
+
+## Technologies Used
+
+- Next.js
+- React
+- CSS Modules
+- Tailwind CSS
+- Environment variables for configuration
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (version 20.x or later recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/imrashidov/recipe-finder-app.git
+   cd recipe-finder-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory with the following variables:
+   ```
+   API_URL=your_api_url_here
+   # Add any other required environment variables
+   ```
+
+### Running the Application
+
+Start the development server:
+
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+### Building for Production
+
+To build the application for production:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+# or 
+yarn build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm start
+# or 
+yarn start
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- View a list of recipes on the home page
+- Click on a recipe to view detailed information
+- Responsive design for mobile and desktop
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/page.js`: Main application page
+- `app/layout.js`: Layout component used across pages
+- `app/recipes/page.js`: Page for displaying all recipes
+- `app/recipes/[id]/page.js`: Page for displaying recipe details
+- `app/components/`: Directory containing reusable components
+  - `Loading.js`: Loading indicator component
+  - `RecipesList.js`: Component for displaying the list of recipes
+  - `RecipeDetails.js`: Component for displaying recipe details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
