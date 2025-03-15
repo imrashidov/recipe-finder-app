@@ -1,103 +1,96 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const [maxReadyTime, setMaxReadyTime] = useState('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const isFormValid = query || cuisine || maxReadyTime;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+    if (query) params.append('query', query);
+    if (cuisine) params.append('cuisine', cuisine);
+    if (maxReadyTime) params.append('maxReadyTime', maxReadyTime);
+
+    router.push(`/recipes?${params.toString()}`);
+  };
+
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-100 p-4">
+      <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md border border-amber-200">
+        <h1 className="text-3xl font-bold text-center mb-6 text-amber-700">Recipe Finder</h1>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="query" className="block text-sm font-medium text-amber-800 mb-1">
+              Recipe Search
+            </label>
+            <input
+              id="query"
+              type="text"
+              placeholder="Search for pasta, chicken, etc."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-amber-50 placeholder:text-amber-400 text-amber-800"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          <div>
+            <label htmlFor="cuisine" className="block text-sm font-medium text-amber-800 mb-1">
+              Cuisine
+            </label>
+            <select
+              id="cuisine"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+              className="w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-amber-50 text-amber-800"
+            >
+              <option value="" className="text-amber-400">
+                Select a cuisine
+              </option>
+              <option value="Italian">Italian</option>
+              <option value="Mexican">Mexican</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Indian">Indian</option>
+              <option value="Japanese">Japanese</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="maxReadyTime" className="block text-sm font-medium text-amber-800 mb-1">
+              Maximum Preparation Time (minutes)
+            </label>
+            <input
+              id="maxReadyTime"
+              type="number"
+              min="0"
+              placeholder="30"
+              value={maxReadyTime}
+              onChange={(e) => setMaxReadyTime(e.target.value)}
+              className="w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-amber-50 placeholder:text-amber-400 text-amber-800"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={!isFormValid}
+            className={`w-full py-3 px-4 rounded-md text-white font-bold shadow-md transition-all duration-300 
+              ${
+                isFormValid
+                  ? 'bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transform hover:-translate-y-1'
+                  : 'bg-gray-400 cursor-not-allowed'
+              }`}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            Find Recipes
+          </button>
+        </form>
+      </div>
+    </main>
   );
 }
